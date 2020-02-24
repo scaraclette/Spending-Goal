@@ -1,5 +1,3 @@
-from decimal import Decimal
-
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -13,7 +11,7 @@ class Spending(models.Model):
 
 class Goal(models.Model):
     # For spender, before adding the authentication app, use user = User.objects.first() in views
-    spender = models.ForeignKey(User, on_delete=models.CASCADE)
+    spender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='allGoals')
     # needToSpend = nts for brevity
     needToSpend = models.DecimalField(max_digits=14, decimal_places=2, default=0)
     currentSpending = models.ManyToManyField(Spending, blank=True)
