@@ -1,28 +1,68 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title%}Current Spending{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/cover.css' %}">
+{% endblock %}
 
 {% block body %}
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
+    <header class="masthead mx-auto">
         <div class="inner">
             <h3 class="masthead-brand">{{user.username}}'s Spending</h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Contact</a>
-            </nav>
+            <!--Show if user is authenticated-->
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">{{currentGoal.needToSpend}}</h1>
-        <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the
-            text, and add your own fullscreen background photo to make it your own.</p>
+        <p class="ntsValue">${{currentGoal.needToSpend}}</p>
+
+        <!-- Button trigger modal -->
         <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+            <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                + Spending
+            </button>
         </p>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <p class="lead">
+            <a href="#" class="btn btn-lg btn-secondary">+ Spending</a>
+        </p> -->
+        <p class="lead">Current Spending: ${{currentGoal.totalSpending}}</p>
+        <p>Check Amount: ${{currentGoal.checkAmount}}</p>
+        <p>Percent Goal: {{currentGoal.percentGoal}}%</p>
+        <p>Spent From Check: {{currentGoal.percentSpendingFromCheck}}%</p>
+        <p>Goal Duration: {{currentGoal.ntsDuration}}</p>
     </main>
+
+    <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">Spending History</a>
+        <a class="nav-link" href="#">Past Goals</a>
+    </nav>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
