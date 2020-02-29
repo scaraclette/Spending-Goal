@@ -20,3 +20,12 @@ def currentGoal(request):
         'form': form,
     }
     return render(request, 'currentGoal.html', context)
+
+def addSpending(request):
+    if request.method == 'POST':
+        form = SpendingForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("FORM VALID")
+            # TODO: redirect to the created topic page
+
+    return HttpResponse("GET REQUEST")

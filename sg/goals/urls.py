@@ -8,4 +8,5 @@ URL notes:
 
 urlpatterns = [
     path("", views.currentGoal, name='currentGoal'),
+    path("add-spending", views.addSpending, name='addSpending')
 ]
