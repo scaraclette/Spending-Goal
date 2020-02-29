@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load mathfilters %}
 
 {% block title%}Current Spending{% endblock %}
 
@@ -40,15 +41,8 @@
                     </div>
                     <form action="{% url 'addSpending' %}" method="post" novalidate>
                         <div class="modal-body">
-                                {% csrf_token %}
-                                {% include 'includes/form.html' %}
-        
-                            {% comment %} <form action="#" method="post">
-                                <label for="your_name">Your name: </label>
-                                <input id="your_name" type="text" name="your_name" value="{{ user.username }}">
-                                <input type="submit" value="OK">
-                            </form> {% endcomment %}
-
+                            {% csrf_token %}
+                            {% include 'includes/form.html' %}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -58,10 +52,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <p class="lead">
-            <a href="#" class="btn btn-lg btn-secondary">+ Spending</a>
-        </p> -->
         <p class="lead">Current Spending: ${{currentGoal.totalSpending}}</p>
         <p>Check Amount: ${{currentGoal.checkAmount}}</p>
         <p>Percent Goal: {{currentGoal.percentGoal}}%</p>

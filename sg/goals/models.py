@@ -28,4 +28,4 @@ class Goal(models.Model):
     ntsDuration = models.CharField(max_length=21, null=True)
 
     def __str__(self):
-        return f"{self.spender}\nNTS: {self.needToSpend}\nCheck Amount: {self.checkAmount}\nPercent Goal: {self.percentGoal}%\nPeriod: {self.ntsDuration}"
+        return f"{self.spender}\nNTS: {self.needToSpend}\nCheck Amount: {self.checkAmount}\nPercent Goal: {self.percentGoal}%\nPeriod: {self.ntsDuration}\nTotal Spending: {self.totalSpending}"

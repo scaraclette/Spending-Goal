@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -24,8 +24,23 @@ def currentGoal(request):
 def addSpending(request):
     if request.method == 'POST':
         form = SpendingForm(request.POST)
+        user = request.user
+        goals = user.allGoals.all()
+        currentGoal = goals[len(goals)-1]
         if form.is_valid():
-            return HttpResponse("FORM VALID")
+            currentPrice=form.cleaned_data.get('price')
+            # Create new form object
+            newSpend = Spending.objects.create(
+                price=currentPrice,
+                item=form.cleaned_data.get('item')
+            )
+            # Add totalSpending
+            currentGoal.totalSpending += currentPrice
+            currentGoal.needToSpend -= currentPrice
+            currentGoal.currentSpending.add(newSpend)
+            currentGoal.save()
+
+            return redirect('currentGoal')
             # TODO: redirect to the created topic page
 
     return HttpResponse("GET REQUEST")
