@@ -21,7 +21,10 @@
         <form action="{% url 'addGoal' %}" method="post" novalidate>
             {% csrf_token %}
             {% include 'includes/form.html' %}
+
+            <button type="Submit" class="btn btn-secondary btn-lg">Create Goal</button>
         </form>
+        <br>
     </main>
 
 

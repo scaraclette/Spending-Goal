@@ -36,6 +36,7 @@ def addSpending(request):
             )
             # Add totalSpending
             currentGoal.totalSpending += currentPrice
+            currentGoal.percentSpendingFromCheck = (currentGoal.totalSpending/currentGoal.checkAmount) * 100
             currentGoal.needToSpend -= currentPrice
             currentGoal.currentSpending.add(newSpend)
             currentGoal.save()
@@ -43,6 +44,7 @@ def addSpending(request):
             return redirect('currentGoal')
             # TODO: redirect to the created topic page
 
+    # TODO: do something when form is invalid
     return HttpResponse("INVALID FORM")
 
 def spendingHistory(request):
@@ -64,4 +66,22 @@ def newGoal(request):
     return render(request, 'newGoal.html', context)
 
 def addGoal(request):
-    return HttpResponse("form submit")
+    if request.method == 'POST':
+        form = NewGoal(request.POST)
+        user = request.user
+        if form.is_valid():
+            percentGoal = form.cleaned_data.get('percentGoal')
+            checkAmount = form.cleaned_data.get('checkAmount')
+            ntsDuration = form.cleaned_data.get('ntsDuration')
+            needToSpend = checkAmount * (percentGoal/100)
+            addedGoal = Goal.objects.create(
+                spender=user,
+                needToSpend=needToSpend,
+                checkAmount=checkAmount,
+                percentGoal=percentGoal,
+                ntsDuration=ntsDuration
+            )
+            return redirect('currentGoal')
+
+    # TODO: do something when form is invalid
+    return HttpResponse("INVALID FORM")

@@ -24,7 +24,7 @@ class Goal(models.Model):
     totalSpending = models.DecimalField(max_digits=14, decimal_places=2, default=0)
     checkAmount = models.DecimalField(max_digits=14, decimal_places=2, default=0)
     percentGoal = models.DecimalField(max_digits=14, decimal_places=2, default=0) # TODO: limit from 0-100 %
-    percentSpendingFromCheck = models.DecimalField(max_digits=14, decimal_places=2, default=0)
+    percentSpendingFromCheck = models.DecimalField(max_digits=14, decimal_places=2, default=0) # initially 0
     ntsDuration = models.CharField(max_length=21, null=True)
 
     def __str__(self):
