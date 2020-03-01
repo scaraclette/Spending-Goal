@@ -12,4 +12,5 @@ urlpatterns = [
     path("spending-history", views.spendingHistory, name='spendingHistory'),
     path("new-goal", views.newGoal, name='newGoal'),
     path("add-goal", views.addGoal, name='addGoal'),
+    path("goal-history", views.goalHistory, name='goalHistory')
 ]

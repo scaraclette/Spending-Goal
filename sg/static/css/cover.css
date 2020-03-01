@@ -129,6 +129,13 @@ body {
     overflow: auto;
 }
 
+.my-custom-scrollbar-2 {
+  position: relative;
+  height: 30rem;
+  width: 50rem;
+  overflow: auto;
+}
+
 .table-wrapper-scroll-y {
     display: block;
 }

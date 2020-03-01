@@ -13,13 +13,20 @@ def currentGoal(request):
     #     redirect to login
     user = User.objects.first() # change later
     goals = user.allGoals.all()
-    currentGoal = goals[len(goals)-1]
-    form = SpendingForm()
+    if len(goals) != 0:
+        currentGoal = goals[len(goals)-1]
+        form = SpendingForm()
+        context = {
+            'currentGoal': currentGoal,
+            'form': form,
+        }
+        return render(request, 'currentGoal.html', context)
+    
+    form = NewGoal()
     context = {
-        'currentGoal': currentGoal,
-        'form': form,
-    }
-    return render(request, 'currentGoal.html', context)
+            'form': form,
+        }
+    return render(request, 'firstGoal.html', context)
 
 def addSpending(request):
     if request.method == 'POST':
@@ -85,3 +92,11 @@ def addGoal(request):
 
     # TODO: do something when form is invalid
     return HttpResponse("INVALID FORM")
+
+def goalHistory(request):
+    user = request.user
+    goals = user.allGoals.all()
+    context = {
+        'goals':goals
+    }
+    return render(request, 'goalHistory.html', context)

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}Spending History{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/cover.css' %}" type="text/css">
+{% endblock %}
+
+{% block body %}
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mx-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">{{user.username}}'s Spending History</h3>
+            <!--Show if user is authenticated-->
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <div class="container">
+            <p>Past Goals</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="table-wraper-scroll-y my-custom-scrollbar-2">
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Need to Spend</th>
+                            <th scope="col">Total Spending</th>
+                            <th scope="col">Spending History (click to expand items)</th>
+                            <!--loop through current spending-->
+                            <th scope="col">Check Amount</th>
+                            <th scope="col">Percent Goal</th>
+                            <th scope="col">Percent Spending From Check</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for currentGoal in goals %}
+                        <tr>
+                            <td>{{currentGoal.ntsDuration}}</td>
+                            <td>{{currentGoal.needToSpend}}</td>
+                            <td>{{currentGoal.totalSpending}}</td>
+                            <td>
+
+                                <!-- Button trigger modal -->
+                                <!-- <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    + Spending
+                                </button> -->
+                                <a data-toggle="modal" data-target="#exampleModal" class="nav-link" href="#">
+                                    ( + )
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div id="modal-override" class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Spending History</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-striped table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Item</th>
+                                                            <th scope="col">Price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for i in currentGoal.currentSpending.all %}
+                                                        <tr>
+                                                            <td>{{ i.item }}</td>
+                                                            <td>${{ i.price }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{currentGoal.checkAmount}}</td>
+                            <td>{{currentGoal.percentGoal}}</td>
+                            <td>{{currentGoal.percentSpendingFromCheck}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <br>
+    </main>
+
+
+    <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
+        <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
+        <a class="nav-link active" href="#">Past Goals</a>
+        <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
+    </nav>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
+                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}

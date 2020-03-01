@@ -41,14 +41,13 @@
                 </tbody>
             </table>
         </div>
-        <br>
     </main>
 
 
     <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
         <a class="nav-link active" href="#">Spending History</a>
-        <a class="nav-link" href="#">Past Goals</a>
+        <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
         <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
     </nav>
 
