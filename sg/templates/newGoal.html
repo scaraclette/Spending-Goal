@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title%}Spending History{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/cover.css' %}" type="text/css">
+{% endblock %}
+
+{% block body %}
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mx-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">{{user.username}}'s Spending History</h3>
+            <!--Show if user is authenticated-->
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <form action="{% url 'addGoal' %}" method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form.html' %}
+        </form>
+    </main>
+
+
+    <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="{% url 'currentGoal' %}">Home</a>
+        <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
+        <a class="nav-link" href="#">Past Goals</a>
+        <a class="nav-link active" href="#">New Goal</a>
+    </nav>
+
+    <footer class="mastfoot mt-auto">
+        <div class="inner">
+            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
+                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
+        </div>
+    </footer>
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Spending, Goal
 from decimal import *
-from .forms import SpendingForm
+from .forms import SpendingForm, NewGoal
 
 # Create your views here.
 # View that shows the current user's goal
@@ -43,4 +43,25 @@ def addSpending(request):
             return redirect('currentGoal')
             # TODO: redirect to the created topic page
 
-    return HttpResponse("GET REQUEST")
+    return HttpResponse("INVALID FORM")
+
+def spendingHistory(request):
+    user = request.user
+    goals = user.allGoals.all()
+    currentGoal = goals[len(goals)-1]
+    currentSpending = currentGoal.currentSpending.all()
+    context = {
+        'currentGoal': currentGoal,
+        'currentSpending': currentSpending
+    }
+    return render(request, 'spendingHistory.html', context)
+
+def newGoal(request):
+    form = NewGoal()
+    context = {
+        'form':form
+    }
+    return render(request, 'newGoal.html', context)
+
+def addGoal(request):
+    return HttpResponse("form submit")

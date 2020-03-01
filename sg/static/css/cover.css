@@ -46,6 +46,10 @@ body {
     font-size: xxx-large;
 }
 
+.ntsTitle {
+    margin-bottom: 0;
+}
+
 .cover-container {
   max-width: 42em;
 }
@@ -118,3 +122,14 @@ body {
 .modal-content {
   background-color: #333;
 }
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 15rem;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+

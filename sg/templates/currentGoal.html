@@ -19,7 +19,10 @@
     </header>
 
     <main role="main" class="inner cover">
-        <p class="ntsValue">${{currentGoal.needToSpend}}</p>
+        <div class="container">
+            <p class="ntsTitle">Need to spend:</p>
+            <p class="ntsValue">${{currentGoal.needToSpend}}</p>
+        </div>
 
         <!-- Button trigger modal -->
         <p class="lead">
@@ -61,14 +64,15 @@
 
     <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Spending History</a>
+        <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
         <a class="nav-link" href="#">Past Goals</a>
+        <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
     </nav>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a
-                    href="https://twitter.com/mdo">@mdo</a>.</p>
+            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
+                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
         </div>
     </footer>
 </div>
