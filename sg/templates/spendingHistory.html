@@ -32,11 +32,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in currentSpending %}
-                    <tr>
-                        <td>{{ i.item }}</td>
-                        <td>${{ i.price }}</td>
-                    </tr>
+                    {% for i in spendingList %}
+                        <tr>
+                            <td>{{ i.item }}</td>
+                            <td>${{ i.price }}</td>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>

@@ -96,7 +96,11 @@ def addGoal(request):
 def goalHistory(request):
     user = request.user
     goals = user.allGoals.all()
+    spendingList = []
+    for currentGoal in goals:
+        spendingList.append(list(currentGoal.currentSpending.all()))
     context = {
-        'goals':goals
+        'goals':goals,
+        'spendingList': spendingList
     }
     return render(request, 'goalHistory.html', context)

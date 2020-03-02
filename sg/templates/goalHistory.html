@@ -30,7 +30,7 @@
                             <th scope="col">Duration</th>
                             <th scope="col">Need to Spend</th>
                             <th scope="col">Total Spending</th>
-                            <th scope="col">Spending History (click to expand items)</th>
+                            <!-- <th scope="col">Spending History (click to expand items)</th> -->
                             <!--loop through current spending-->
                             <th scope="col">Check Amount</th>
                             <th scope="col">Percent Goal</th>
@@ -43,51 +43,12 @@
                             <td>{{currentGoal.ntsDuration}}</td>
                             <td>{{currentGoal.needToSpend}}</td>
                             <td>{{currentGoal.totalSpending}}</td>
-                            <td>
-
-                                <!-- Button trigger modal -->
-                                <!-- <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    + Spending
-                                </button> -->
-                                <a data-toggle="modal" data-target="#exampleModal" class="nav-link" href="#">
-                                    ( + )
-                                </a>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div id="modal-override" class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Spending History</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <table class="table table-striped table-dark">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Item</th>
-                                                            <th scope="col">Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {% for i in currentGoal.currentSpending.all %}
-                                                        <tr>
-                                                            <td>{{ i.item }}</td>
-                                                            <td>${{ i.price }}</td>
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <!-- <td>
+                                {% for cur in currentGoal.currentSpending.all %}
+                                {{ cur.item }}- ${{ cur.price }}
+                                <br>
+                                {% endfor %}
+                            </td> -->
                             <td>{{currentGoal.checkAmount}}</td>
                             <td>{{currentGoal.percentGoal}}</td>
                             <td>{{currentGoal.percentSpendingFromCheck}}</td>
