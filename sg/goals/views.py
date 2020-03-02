@@ -58,10 +58,16 @@ def spendingHistory(request):
     user = request.user
     goals = user.allGoals.all()
     currentGoal = goals[len(goals)-1]
+    message = ""
     currentSpending = currentGoal.currentSpending.all()
+
+    if len(currentSpending) == 0:
+        message = 'No spending history!'
+
     context = {
         'currentGoal': currentGoal,
-        'currentSpending': currentSpending
+        'currentSpending': currentSpending,
+        'message': message
     }
     return render(request, 'spendingHistory.html', context)
 
@@ -95,12 +101,23 @@ def addGoal(request):
 
 def goalHistory(request):
     user = request.user
-    goals = user.allGoals.all()
+    allGoal = user.allGoals.all()
+
+    message = ''
+
+    excludeGoal = allGoal[len(allGoal)-1].id
+    goals = user.allGoals.exclude(id=excludeGoal).all()
+
+    if len(goals) == 0:
+        message = 'No past goals!'
+
     spendingList = []
     for currentGoal in goals:
         spendingList.append(list(currentGoal.currentSpending.all()))
     context = {
         'goals':goals,
-        'spendingList': spendingList
+        'spendingList': spendingList,
+        'message': message
     }
+    print(message)
     return render(request, 'goalHistory.html', context)

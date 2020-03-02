@@ -18,29 +18,36 @@
     </header>
 
     <main role="main" class="inner cover">
-        <div class="container">
-            <p>Current Spending:</p>
-            <p class="ntsValue">${{currentGoal.totalSpending}}</p>
+            {% if message is not None%}
+                <div class="container">
+            <p>Spending History</p>
         </div>
+                <p class="ntsValue">{{message}}</p>
+            {% else %}
+            <div class="container">
+                <p>Current Spending:</p>
+                <p class="ntsValue">${{currentGoal.totalSpending}}</p>
+            </div>
 
-        <div class="table-wraper-scroll-y my-custom-scrollbar">
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in spendingList %}
+            <div class="table-wraper-scroll-y my-custom-scrollbar">
+                <table class="table table-striped table-dark">
+                    <thead>
                         <tr>
-                            <td>{{ i.item }}</td>
-                            <td>${{ i.price }}</td>
+                            <th scope="col">Item</th>
+                            <th scope="col">Price</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {% for i in currentSpending %}
+                            <tr>
+                                <td>{{ i.item }}</td>
+                                <td>${{ i.price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
     </main>
 
 
