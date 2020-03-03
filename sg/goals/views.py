@@ -73,8 +73,19 @@ def spendingHistory(request):
 
 def newGoal(request):
     form = NewGoal()
+    user = request.user
+
+    oldUser = False
+    allGoal = user.allGoals.all()
+    print(len(allGoal))
+    if len(allGoal) != 0:
+        oldUser = True 
+    
+    print(oldUser)
+
     context = {
-        'form':form
+        'form':form,
+        'oldUser': oldUser
     }
     return render(request, 'newGoal.html', context)
 

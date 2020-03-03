@@ -12,7 +12,7 @@
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <header class="masthead mx-auto">
         <div class="inner">
-            <h3 class="masthead-brand">{{user.username}}'s Spending History</h3>
+            <h3 class="masthead-brand">{{user.username}}'s First Goal</h3>
             <!--Show if user is authenticated-->
         </div>
     </header>
@@ -28,12 +28,14 @@
     </main>
 
 
-    <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
-        <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
-        <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
-        <a class="nav-link active" href="#">New Goal</a>
-    </nav>
+    {% if oldUser %}
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
+            <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
+            <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
+            <a class="nav-link active" href="#">New Goal</a>
+        </nav>
+    {% endif %}
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
