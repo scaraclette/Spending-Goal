@@ -19,7 +19,7 @@ def currentGoal(request):
         return render(request, 'currentGoal.html', {'empty':empty})
 
     form = SpendingForm()
-    Context = {
+    context = {
         'currentGoal': currentGoal,
         'form': form,
     }    
