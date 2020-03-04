@@ -9,39 +9,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mx-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">{{user.username}}'s First Goal</h3>
-            <!--Show if user is authenticated-->
-        </div>
-    </header>
+<main role="main" class="inner cover">
+    <form action="{% url 'addGoal' %}" method="post" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
 
-    <main role="main" class="inner cover">
-        <form action="{% url 'addGoal' %}" method="post" novalidate>
-            {% csrf_token %}
-            {% include 'includes/form.html' %}
-
-            <button type="Submit" class="btn btn-secondary btn-lg">Create Goal</button>
-        </form>
-        <br>
-    </main>
+        <button type="Submit" class="btn btn-secondary btn-lg">Create Goal</button>
+    </form>
+    <br>
+</main>
 
 
-    {% if oldUser %}
-        <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
-            <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
-            <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
-            <a class="nav-link active" href="#">New Goal</a>
-        </nav>
-    {% endif %}
-
-    <footer class="mastfoot mt-auto">
-        <div class="inner">
-            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
-                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
-        </div>
-    </footer>
-</div>
+<nav class="nav nav-masthead justify-content-center">
+    <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
+    <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
+    <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
+    <a class="nav-link active" href="#">New Goal</a>
+</nav>
 {% endblock %}

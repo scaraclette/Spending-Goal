@@ -15,48 +15,12 @@
 
 {% endfor %} -->
 
-<td>
-
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal"
-        data-target="#exampleModal">
-        + Spending
-    </button> -->
-    <a data-toggle="modal" data-target="#exampleModal" class="nav-link" href="#">
-        ( + )
-    </a>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div id="modal-override" class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Spending History</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">Item</th>
-                                <th scope="col">Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for cur in currentGoal.currentSpending.all %}
-                                <tr>
-                                    <td>{{ cur.item }}</td>
-                                    <td>${{ cur.price }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">{{user.username}}'s Spending</h3>
+            <!--Show if user is authenticated-->
+            <a href="#"><u>Logout</u></a>
         </div>
-    </div>
-</td>
+    </header>
+</div>

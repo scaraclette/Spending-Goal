@@ -9,24 +9,21 @@ from .forms import SpendingForm, NewGoal
 # Create your views here.
 # View that shows the current user's goal
 def currentGoal(request):
-    # if !request.user.is_authenticated():
-    #     redirect to login
-    user = User.objects.first() # change later
+    # TODO: user needs to be authenticated
+    user = request.user # change later
     goals = user.allGoals.all()
-    if len(goals) != 0:
+    try:
         currentGoal = goals[len(goals)-1]
-        form = SpendingForm()
-        context = {
-            'currentGoal': currentGoal,
-            'form': form,
-        }
-        return render(request, 'currentGoal.html', context)
-    
-    form = NewGoal()
-    context = {
-            'form': form,
-        }
-    return render(request, 'firstGoal.html', context)
+    except:
+        empty = True
+        return render(request, 'currentGoal.html', {'empty':empty})
+
+    form = SpendingForm()
+    Context = {
+        'currentGoal': currentGoal,
+        'form': form,
+    }    
+    return render(request, 'currentGoal.html', context)
 
 def addSpending(request):
     if request.method == 'POST':
@@ -57,35 +54,33 @@ def addSpending(request):
 def spendingHistory(request):
     user = request.user
     goals = user.allGoals.all()
-    currentGoal = goals[len(goals)-1]
-    message = ""
+    empty = True
+    try:
+        currentGoal = goals[len(goals)-1]
+    except:
+        return render(request, 'spendingHistory.html', {'empty':empty})
+    
     currentSpending = currentGoal.currentSpending.all()
 
-    if len(currentSpending) == 0:
-        message = 'No spending history!'
+    if len(currentSpending) != 0:
+        empty = False
 
     context = {
         'currentGoal': currentGoal,
         'currentSpending': currentSpending,
-        'message': message
+        'empty': empty,
     }
+    print(currentSpending)
     return render(request, 'spendingHistory.html', context)
 
 def newGoal(request):
     form = NewGoal()
     user = request.user
-
-    oldUser = False
     allGoal = user.allGoals.all()
     print(len(allGoal))
-    if len(allGoal) != 0:
-        oldUser = True 
-    
-    print(oldUser)
 
     context = {
         'form':form,
-        'oldUser': oldUser
     }
     return render(request, 'newGoal.html', context)
 
@@ -114,13 +109,16 @@ def goalHistory(request):
     user = request.user
     allGoal = user.allGoals.all()
 
-    message = ''
+    empty = True
+    try:
+        excludeGoal = allGoal[len(allGoal)-1].id
+    except:
+        return render(request, 'goalHistory.html', {'empty':empty})
 
-    excludeGoal = allGoal[len(allGoal)-1].id
     goals = user.allGoals.exclude(id=excludeGoal).all()
 
-    if len(goals) == 0:
-        message = 'No past goals!'
+    if len(goals) != 0:
+        empty = False
 
     spendingList = []
     for currentGoal in goals:
@@ -128,7 +126,12 @@ def goalHistory(request):
     context = {
         'goals':goals,
         'spendingList': spendingList,
-        'message': message
+        'empty': empty
     }
-    print(message)
+
+    for i in spendingList:
+        print(i)
+        if i is None:
+            print("NONE")
+
     return render(request, 'goalHistory.html', context)

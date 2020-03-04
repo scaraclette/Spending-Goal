@@ -10,70 +10,58 @@
 {% endblock %}
 
 {% block body %}
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mx-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">{{user.username}}'s Spending</h3>
-            <!--Show if user is authenticated-->
-        </div>
-    </header>
+<main role="main" class="inner cover">
+    {% if empty %}
+    <p class="ntsValue">No current goal!</p>
+    {% else %}
+    <div class="container">
+        <p class="ntsTitle">Need to spend:</p>
+        <p class="ntsValue">${{currentGoal.needToSpend}}</p>
+    </div>
 
-    <main role="main" class="inner cover">
-        <div class="container">
-            <p class="ntsTitle">Need to spend:</p>
-            <p class="ntsValue">${{currentGoal.needToSpend}}</p>
-        </div>
+    <!-- Button trigger modal -->
+    <p class="lead">
+        <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal">
+            + Spending
+        </button>
+    </p>
 
-        <!-- Button trigger modal -->
-        <p class="lead">
-            <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#exampleModal">
-                + Spending
-            </button>
-        </p>
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div id="modal-override" class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add Spending</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="{% url 'addSpending' %}" method="post" novalidate>
-                        <div class="modal-body">
-                            {% csrf_token %}
-                            {% include 'includes/form.html' %}
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">+</button>
-                        </div>
-                    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div id="modal-override" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Spending</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form action="{% url 'addSpending' %}" method="post" novalidate>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">+</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <p class="lead">Current Spending: ${{currentGoal.totalSpending}}</p>
-        <p>Check Amount: ${{currentGoal.checkAmount}}</p>
-        <p>Percent Goal: {{currentGoal.percentGoal}}%</p>
-        <p>Spent From Check: {{currentGoal.percentSpendingFromCheck}}%</p>
-        <p>Goal Duration: {{currentGoal.ntsDuration}}</p>
-    </main>
+    </div>
+    <p class="lead">Current Spending: ${{currentGoal.totalSpending}}</p>
+    <p>Check Amount: ${{currentGoal.checkAmount}}</p>
+    <p>Percent Goal: {{currentGoal.percentGoal}}%</p>
+    <p>Spent From Check: {{currentGoal.percentSpendingFromCheck}}%</p>
+    <p>Goal Duration: {{currentGoal.ntsDuration}}</p>
+    {% endif %}
+</main>
 
-    <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
-        <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
-        <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
-    </nav>
-
-    <footer class="mastfoot mt-auto">
-        <div class="inner">
-            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
-                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
-        </div>
-    </footer>
-</div>
+<nav class="nav nav-masthead justify-content-center">
+    <a class="nav-link active" href="#">Home</a>
+    <a class="nav-link" href="{% url 'spendingHistory' %}">Spending History</a>
+    <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
+    <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
+</nav>
 {% endblock %}

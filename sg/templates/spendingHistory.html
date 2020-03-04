@@ -9,60 +9,42 @@
 {% endblock %}
 
 {% block body %}
-<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mx-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">{{user.username}}'s Spending History</h3>
-            <!--Show if user is authenticated-->
-        </div>
-    </header>
+<main role="main" class="inner cover">
 
-    <main role="main" class="inner cover">
-            {% if message is not None%}
-                <div class="container">
-            <p>Spending History</p>
-        </div>
-                <p class="ntsValue">{{message}}</p>
-            {% else %}
-            <div class="container">
-                <p>Current Spending:</p>
-                <p class="ntsValue">${{currentGoal.totalSpending}}</p>
-            </div>
+    {% if empty %}
+    <p class="ntsValue">No spending history!</p>
+    {% else %}
+    <div class="container">
+        <p>Current Spending:</p>
+        <p class="ntsValue">${{currentGoal.totalSpending}}</p>
+    </div>
 
-            <div class="table-wraper-scroll-y my-custom-scrollbar">
-                <table class="table table-striped table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in currentSpending %}
-                            <tr>
-                                <td>{{ i.item }}</td>
-                                <td>${{ i.price }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% endif %}
-    </main>
+    <div class="table-wraper-scroll-y my-custom-scrollbar">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in currentSpending %}
+                <tr>
+                    <td>{{ i.item }}</td>
+                    <td>${{ i.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</main>
 
 
-    <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
-        <a class="nav-link active" href="#">Spending History</a>
-        <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
-        <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
-    </nav>
-
-    <footer class="mastfoot mt-auto">
-        <div class="inner">
-            <p>Spending Goal 2020 <a href="https://github.com/scaraclette/Spending-Goal.git">GitHub</a>, by <a
-                    href="https://github.com/scaraclette/">@scaraclette</a>.</p>
-        </div>
-    </footer>
-</div>
+<nav class="nav nav-masthead justify-content-center">
+    <a class="nav-link" href="{% url 'currentGoal'%}">Home</a>
+    <a class="nav-link active" href="#">Spending History</a>
+    <a class="nav-link" href="{% url 'goalHistory' %}">Past Goals</a>
+    <a class="nav-link" href="{% url 'newGoal' %}">New Goal</a>
+</nav>
 {% endblock %}
