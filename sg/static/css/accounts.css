@@ -1,18 +1,20 @@
 body {
-    background-image: url(../img/repeated-square-dark.png);
-  }
-  
-  .logo {
-    font-family: 'Peralta', cursive;
-  }
-  
-  .logo a {
-    color: rgba(0,0,0,.9);
-  }
-  
-  .logo a:hover,
-  .logo a:active {
-    text-decoration: none;
-  }
+  background-color: #333333;
+}
 
-  
+.logo {
+  font-family: 'Peralta', cursive;
+}
+
+.logo a {
+  color: rgba(0,0,0,.9);
+}
+
+.logo a:hover,
+.logo a:active {
+  text-decoration: none;
+}
+
+.space {
+  padding-bottom: 25%;
+}
