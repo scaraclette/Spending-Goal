@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-# from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from .models import Spending, Goal
 from decimal import *
 from .forms import SpendingForm, NewGoal
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
-# View that shows the current user's goal
+@login_required(login_url='login')
 def currentGoal(request):
     # TODO: user needs to be authenticated
     user = request.user # change later
@@ -25,6 +26,7 @@ def currentGoal(request):
     }    
     return render(request, 'currentGoal.html', context)
 
+@login_required(login_url='login')
 def addSpending(request):
     if request.method == 'POST':
         form = SpendingForm(request.POST)
@@ -51,6 +53,7 @@ def addSpending(request):
     # TODO: do something when form is invalid
     return HttpResponse("INVALID FORM")
 
+@login_required
 def spendingHistory(request):
     user = request.user
     goals = user.allGoals.all()
@@ -73,6 +76,7 @@ def spendingHistory(request):
     print(currentSpending)
     return render(request, 'spendingHistory.html', context)
 
+@login_required(login_url='login')
 def newGoal(request):
     form = NewGoal()
     user = request.user
@@ -84,6 +88,7 @@ def newGoal(request):
     }
     return render(request, 'newGoal.html', context)
 
+@login_required(login_url='login')
 def addGoal(request):
     if request.method == 'POST':
         form = NewGoal(request.POST)
@@ -105,6 +110,7 @@ def addGoal(request):
     # TODO: do something when form is invalid
     return HttpResponse("INVALID FORM")
 
+@login_required(login_url='login')
 def goalHistory(request):
     user = request.user
     allGoal = user.allGoals.all()
