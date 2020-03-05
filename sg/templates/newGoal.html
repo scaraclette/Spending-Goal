@@ -10,6 +10,10 @@
 
 {% block body %}
 <main role="main" class="inner cover">
+    <div class="container">
+        <p class="ntsValue">New Goal</p>
+    </div>
+    
     <form action="{% url 'addGoal' %}" method="post" novalidate>
         {% csrf_token %}
         {% include 'includes/form.html' %}
