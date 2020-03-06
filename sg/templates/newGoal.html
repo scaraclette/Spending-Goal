@@ -11,6 +11,9 @@
 {% block body %}
 <main role="main" class="inner cover">
     <div class="container">
+        {% if invalidForm %}
+            <p class="ntsTitle">INVALID/EMPTY FORM!<br>Make sure to create check amount and percent goal with 2 decimal places.<br>Also add a goal duration or input anything if unspecified.<br></p>    
+        {% endif %}
         <p class="ntsValue">New Goal</p>
     </div>
     

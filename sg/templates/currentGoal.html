@@ -15,6 +15,9 @@
     <p class="ntsValue">No current goal!</p>
     {% else %}
     <div class="container">
+        {% if invalidForm %}
+        <p class="ntsTitle">INVALID/EMPTY FORM!<br>Make sure to add price with 2 decimal places<br><br></p>    
+        {% endif %}
         <p class="ntsTitle">Need to spend:</p>
         <p class="ntsValue">${{currentGoal.needToSpend}}</p>
     </div>

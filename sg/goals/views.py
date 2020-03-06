@@ -10,8 +10,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='login')
 def currentGoal(request):
-    # TODO: user needs to be authenticated
-    user = request.user # change later
+    user = request.user
     goals = user.allGoals.all()
     try:
         currentGoal = goals[len(goals)-1]
@@ -51,7 +50,17 @@ def addSpending(request):
             # TODO: redirect to the created topic page
 
     # TODO: do something when form is invalid
-    return HttpResponse("INVALID FORM")
+    user = request.user
+    goals = user.allGoals.all()
+    form = SpendingForm()
+    currentGoal = goals[len(goals)-1]
+    invalidForm = True
+    context = {
+        'currentGoal':currentGoal,
+        'form':form,
+        'invalidForm':invalidForm,
+    }
+    return render(request, 'currentGoal.html', context)
 
 @login_required
 def spendingHistory(request):
@@ -81,7 +90,6 @@ def newGoal(request):
     form = NewGoal()
     user = request.user
     allGoal = user.allGoals.all()
-    print(len(allGoal))
 
     context = {
         'form':form,
@@ -108,7 +116,15 @@ def addGoal(request):
             return redirect('currentGoal')
 
     # TODO: do something when form is invalid
-    return HttpResponse("INVALID FORM")
+    form = NewGoal()
+    user = request.user
+    allGoal = user.allGoals.all()
+    invalidForm = True
+    context = {
+        'form':form,
+        'invalidForm':invalidForm
+    }
+    return render(request, 'newGoal.html', context)
 
 @login_required(login_url='login')
 def goalHistory(request):
