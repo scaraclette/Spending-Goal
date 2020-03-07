@@ -6,8 +6,6 @@ A web app that lets users specify what percentage of income they want to spend. 
 # To start application
 Install Python packages.<br>
 ```$ pip3 install -r requirments.txt```<br>
-Go to project directory named 'sg'<br>
-```$ cd sg```<br>
 Migrate and Makemigrations for Django app<br>
 ```$ python3 manage.py makemigrations```<br>
 ```$ python3 manage.py migrate```<br>
