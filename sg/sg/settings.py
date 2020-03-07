@@ -25,7 +25,7 @@ SECRET_KEY = 'a_47p-bk8d#y5(jd58$)6tw+f!3*^*gozm28c&ipuyu1-58oy*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -130,3 +130,7 @@ STATICFILES_DIRS = [
 
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'newGoal'
+
+# Configure Django App for Heroku
+import django_heroku
+django_heroku.settings(locals())
