@@ -1,0 +1,6 @@
+1. NTSduration from goals models checks the correct user input as correct date.
+2. Positive / negative NTS value transfers to next period.
+
+Handle invalid forms:
+1. New goal
+2. need to spend + spending
