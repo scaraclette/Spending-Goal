@@ -1,5 +1,6 @@
 # Spending Goal
 ## Deployed App: https://spending-goal.herokuapp.com
+## Video Demo: https://youtu.be/MB57oc4Ck6Q
 A web app that lets users specify what percentage of income they want to spend. Users will be able to store a list of items they purchased, see their past goals, and create new ones.
 
 ![Home](https://i.imgur.com/jj1aXZC.png)
