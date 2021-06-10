@@ -1,4 +1,4 @@
-Django==3.0.3
+Django==3.1.12
 iPython==7.12.0
 django-widget-tweaks==1.4.5
 django-mathfilters==1.0.0
