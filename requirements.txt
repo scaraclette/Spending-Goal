@@ -1,5 +1,5 @@
 Django==3.0.3
-iPython==7.12.0
+iPython==7.16.3
 django-widget-tweaks==1.4.5
 django-mathfilters==1.0.0
 django-heroku==0.3.1
